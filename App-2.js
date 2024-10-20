@@ -2,43 +2,16 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 
-// Define your API endpoint and key
-const API_URL = 'https://your-api-endpoint.com/login';  // Replace with your API
-const API_KEY = 'your-api-key';  // Replace with your API key if needed
-
 export default function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = async () => {
+  const handleLogin = () => {
     if (email === '' || password === '') {
       Alert.alert('Error', 'Please enter both email and password');
     } else {
-      try {
-        const response = await fetch(API_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${API_KEY}`,  // Authorization header if needed
-          },
-          body: JSON.stringify({
-            email: email,
-            password: password
-          }),
-        });
-        const data = await response.json();
-
-        if (response.ok) {
-          // Handle success (e.g., store token, navigate to dashboard)
-          Alert.alert('Login Successful', `Welcome ${data.username}`);
-          // You can navigate to the dashboard or store the token here
-        } else {
-          // Handle error response from server
-          Alert.alert('Login Failed', data.message || 'Invalid credentials');
-        }
-      } catch (error) {
-        Alert.alert('Error', 'Something went wrong. Please try again later.');
-      }
+      // Handle login logic here
+      Alert.alert('Success', `Logged in with ${email}`);
     }
   };
 
