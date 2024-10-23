@@ -1,109 +1,55 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import LoginScreen from './screens/LoginScreen';  // Ensure the path is correct
+import RegisterScreen from './screens/RegisterScreen';  // Ensure the path is correct
+import HomeScreen from './screens/HomeScreen';  // Ensure the path is correct
+import SettingsScreen from './screens/SettingsScreen'; // You can add other screens for bottom tabs
 
-// Define your API endpoint and key
-const API_URL = 'https://your-api-endpoint.com/login';  // Replace with your API
-const API_KEY = 'your-api-key';  // Replace with your API key if needed
+// Create stack and tab navigators
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
-export default function App() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleLogin = async () => {
-    if (email === '' || password === '') {
-      Alert.alert('Error', 'Please enter both email and password');
-    } else {
-      try {
-        const response = await fetch(API_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${API_KEY}`,  // Authorization header if needed
-          },
-          body: JSON.stringify({
-            email: email,
-            password: password
-          }),
-        });
-        const data = await response.json();
-
-        if (response.ok) {
-          // Handle success (e.g., store token, navigate to dashboard)
-          Alert.alert('Login Successful', `Welcome ${data.username}`);
-          // You can navigate to the dashboard or store the token here
-        } else {
-          // Handle error response from server
-          Alert.alert('Login Failed', data.message || 'Invalid credentials');
-        }
-      } catch (error) {
-        Alert.alert('Error', 'Something went wrong. Please try again later.');
-      }
-    }
-  };
-
+// Define the bottom tab navigator
+function TabNavigator() {
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <Text style={styles.title}>Login</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
+    <Tab.Navigator>
+      <Tab.Screen 
+        name="Home" 
+        component={HomeScreen} 
+        options={{ title: 'Home' }} // Customize as needed
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        autoCapitalize="none"
+      <Tab.Screen 
+        name="Settings" 
+        component={SettingsScreen} 
+        options={{ title: 'Settings' }} // Add your Settings or other screens
       />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-    </View>
+    </Tab.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#f5f5f5',
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  input: {
-    width: '100%',
-    height: 50,
-    borderColor: '#ddd',
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    marginBottom: 15,
-    backgroundColor: '#fff',
-  },
-  button: {
-    width: '100%',
-    height: 50,
-    backgroundColor: '#3498db',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 8,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-});
+// Main app component
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ title: 'Login' }}  // Customize the header title
+        />
+        <Stack.Screen
+          name="Register"
+          component={RegisterScreen}
+          options={{ title: 'Register' }}  // Customize the header title
+        />
+        <Stack.Screen
+          name="Home"
+          component={TabNavigator}  // Replace HomeScreen with TabNavigator
+          options={{ title: 'Home' }}  // Customize the header title
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
