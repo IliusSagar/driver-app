@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 
-export default function HomeScreenTwo({ navigation }) {
+export default function SettingsScreen({ navigation }) {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Account Screen</Text>
+            <Text style={styles.title}>Setting Screen</Text>
 
         </View>
     );

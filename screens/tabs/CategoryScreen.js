@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 
-export default function HomeScreenTwo({ navigation }) {
+export default function CategoryScreen({ navigation }) {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Home Two Screen</Text>
+            <Text style={styles.title}>Category Screen</Text>
 
         </View>
     );

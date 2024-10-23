@@ -4,8 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import LoginScreen from './screens/LoginScreen';  // Ensure the path is correct
 import RegisterScreen from './screens/RegisterScreen';  // Ensure the path is correct
-import HomeScreen from './screens/HomeScreen';  // Ensure the path is correct
-import SettingsScreen from './screens/SettingsScreen'; // You can add other screens for bottom tabs
+import CategoryScreen from './screens/tabs/CategoryScreen';  // Ensure the path is correct
+import SettingsScreen from './screens/tabs/SettingsScreen'; // You can add other screens for bottom tabs
 
 // Create stack and tab navigators
 const Stack = createStackNavigator();
@@ -15,14 +15,14 @@ const Tab = createBottomTabNavigator();
 function TabNavigator() {
   return (
     <Tab.Navigator>
-      <Tab.Screen 
-        name="Home" 
-        component={HomeScreen} 
-        options={{ title: 'Home' }} // Customize as needed
+      <Tab.Screen
+        name="Category"
+        component={CategoryScreen}
+        options={{ title: 'Category' }} // Customize as needed
       />
-      <Tab.Screen 
-        name="Settings" 
-        component={SettingsScreen} 
+      <Tab.Screen
+        name="Settings"
+        component={SettingsScreen}
         options={{ title: 'Settings' }} // Add your Settings or other screens
       />
     </Tab.Navigator>
