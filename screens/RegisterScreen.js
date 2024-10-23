@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 
+
 const API_URL = 'http://127.0.0.1:8000/api/register';  // Update with your API URL
 
 export default function LoginScreen({ navigation }) {

@@ -6,6 +6,7 @@ import LoginScreen from './screens/LoginScreen';  // Ensure the path is correct
 import RegisterScreen from './screens/RegisterScreen';  // Ensure the path is correct
 import CategoryScreen from './screens/tabs/CategoryScreen';  // Ensure the path is correct
 import SettingsScreen from './screens/tabs/SettingsScreen'; // You can add other screens for bottom tabs
+import Toast from 'react-native-toast-message';  // Import Toast
 
 // Create stack and tab navigators
 const Stack = createStackNavigator();
@@ -15,6 +16,7 @@ const Tab = createBottomTabNavigator();
 function TabNavigator() {
   return (
     <Tab.Navigator>
+
       <Tab.Screen
         name="Category"
         component={CategoryScreen}
@@ -32,24 +34,28 @@ function TabNavigator() {
 // Main app component
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ title: 'Login' }}  // Customize the header title
-        />
-        <Stack.Screen
-          name="Register"
-          component={RegisterScreen}
-          options={{ title: 'Register' }}  // Customize the header title
-        />
-        <Stack.Screen
-          name="Home"
-          component={TabNavigator}  // Replace HomeScreen with TabNavigator
-          options={{ title: 'Home' }}  // Customize the header title
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ title: 'Login' }}  // Customize the header title
+          />
+          <Stack.Screen
+            name="Register"
+            component={RegisterScreen}
+            options={{ title: 'Register' }}  // Customize the header title
+          />
+          <Stack.Screen
+            name="Home"
+            component={TabNavigator}  // Replace HomeScreen with TabNavigator
+            options={{ title: 'Home' }}  // Customize the header title
+          />
+
+        </Stack.Navigator>
+      </NavigationContainer>
+      <Toast />
+    </>
   );
 }

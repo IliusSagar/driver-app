@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 const API_URL = 'http://127.0.0.1:8000/api/login';  // Update with your API URL
 
@@ -25,10 +26,18 @@ export default function LoginScreen({ navigation }) {
             const data = await response.json();
 
             if (response.ok) {
-                Alert.alert('Login Successful', `Welcome back!`);
+                Toast.show({
+                    type: 'success',
+                    text1: 'Login Successful',
+                    text2: 'Welcome back! 👋',
+                });
                 navigation.navigate('Home');  // Navigate to Home screen
             } else {
-                Alert.alert('Login Failed', data.message || 'Something went wrong');
+                Toast.show({
+                    type: 'error',
+                    text1: 'Login Failed',
+                    text2: 'Invalid email or password.',
+                });
             }
         } catch (error) {
             Alert.alert('Error', 'Something went wrong. Please try again later.');
